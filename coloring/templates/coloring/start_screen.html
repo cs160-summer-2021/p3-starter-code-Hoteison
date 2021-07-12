@@ -6,7 +6,6 @@
 	<title>Start Screen</title>
 
 	<link rel="stylesheet" type="text/css" href="{% static 'coloring/vendors/bootstrap/css/bootstrap.css' %}" />
-	<link rel="stylesheet" type="text/css" href="{% static 'coloring/css/style.css' %}" />
 	<link href='https://fonts.googleapis.com/css?family=Saira Extra Condensed' rel='stylesheet'>
 
   <style type="text/css">
@@ -15,28 +14,60 @@
       white-space: nowrap;
     }
 
+    .extra-condensed {
+      font-family: Saira Extra Condensed;
+    }
+
+    .title {
+      background-image: url("https://i.ibb.co/8Kkw7mZ/Rainbow-Background.png");
+  		background-origin: border-box;
+    }
+
 	</style>
 
 </head>
 <body>
-	<a href="https://ibb.co/3rKbCTZ" style="font-family: Saira Extra Condensed"><img src="https://i.ibb.co/8Kkw7mZ/Rainbow-Background.png" alt="Rainbow-Background" border="0"> Coloring Book</a>
-  <div class="container">
-    <div class="row">
+  <h1 class="title w-100 extra-condensed p-5 my-5">Coloring Book</h1>
+  <div class="container-flex">
+    <div class="row bg-danger mx-0 my-5 p-4">
       <div class="col">
-        <h2>Animals</h2>
-        <a href="/coloring/animals/" class="float-right"><img src="{% static 'coloring/images/grid.png' %}"></a>
+        <h2>Animals<a href="/coloring/animals/" class="float-right"><img src="{% static 'coloring/images/grid.png' %}"></a></h2>
+
+        <div class="scrolling ">
+          <a href="" class="mx-2"><img src="{% static 'coloring/images/animal_1.png' %}"></a>
+          <a href="" class="mx-2"><img src="{% static 'coloring/images/animal_2.png' %}"></a>
+          <a href="" class="mx-2"><img src="{% static 'coloring/images/animal_3.png' %}"></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="row bg-success mx-0 my-5 p-4">
+      <div class="col">
+        <h2>Flowers<a href="/coloring/flowers/" class="float-right"><img src="{% static 'coloring/images/grid.png' %}"></a></h2>
+
         <div class="scrolling">
-          <a href="">
+          <a href="" class="mx-2"><img src="{% static 'coloring/images/flower_1.png' %}"></a>
+          <a href="" class="mx-2"><img src="{% static 'coloring/images/flower_2.png' %}"></a>
+          <a href="" class="mx-2"><img src="{% static 'coloring/images/flower_3.png' %}"></a>
+          <a href="" class="mx-2"><img src="{% static 'coloring/images/flower_4.png' %}"></a>
+          <a href="" class="mx-2"><img src="{% static 'coloring/images/flower_5.png' %}"></a>
+          <a href="" class="mx-2"><img src="{% static 'coloring/images/flower_6.png' %}"></a>
+          <a href="" class="mx-2"><img src="{% static 'coloring/images/flower_7.png' %}"></a>
+          <a href="" class="mx-2"><img src="{% static 'coloring/images/flower_8.png' %}"></a>
         </div>
       </div>
     </div>
 
     <div class="row">
-      <div class="col"></div>
-    </div>
+      <div class="col">
+        <h2>Animals<a href="/coloring/landscapes/" class="float-right"><img src="{% static 'coloring/images/grid.png' %}"></a></h2>
 
-    <div class="row">
-      <div class="col"></div>
+        <div class="scrolling">
+          <a href="" class="mx-2"><img src="{% static 'coloring/images/landscape_1.png' %}"></a>
+          <a href="" class="mx-2"><img src="{% static 'coloring/images/landscape_2.png' %}"></a>
+          <a href="" class="mx-2"><img src="{% static 'coloring/images/landscape_3.png' %}"></a>
+        </div>
+      </div>
     </div>
 
   </div>
