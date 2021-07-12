@@ -8,8 +8,30 @@
 
 	<script type="text/javascript" src="{% static 'coloring/vendors/jquery/jquery-3.3.1.min.js' %}"></script>
 	<script type="text/javascript" src="{% static 'coloring/vendors/paper/paper-full.min.js' %}"></script>
+  <link href='https://fonts.googleapis.com/css?family=Saira Extra Condensed' rel='stylesheet'>
 
 	<style type="text/css">
+    .animals {
+      font-family: Saira Extra Condensed;
+      text-align: center;
+      font-size: 60px;
+      background-color: #F16363;
+    }
+
+    .animals_top {
+      background-color: #F16363;
+      margin: 0 !important;
+      padding: 0 !important;
+    }
+
+    .animals_list {
+      align-content: center;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+    }
 
 	</style>
 
@@ -18,16 +40,17 @@
 	</script>
 </head>
 <body>
+      <h2 class="animals animals_top">Animals</h2>
   <div class="container">
-    <div class="row">
-      <div class="col">
-        <h2>Animals</h2>
-        <div class="scrolling">
-          <a href="">
-        </div>
-      </div>
-    </div>
+<div class="row">
+    <div class="col-6">
+    test
+    <a href="" class="mx-2"><img src="{% static 'coloring/images/animal_3.png' %}"> </a>
   </div>
-
+  <div class="col-6">
+    <a href="" class="mx-2"><img src="{% static 'coloring/images/animal_2.png' %}"></a>
+  </div>
+  </div>
+  </div>
 </body>
 </html>
