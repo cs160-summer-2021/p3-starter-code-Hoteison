@@ -1,0 +1,44 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Start Screen</title>
+
+	<link rel="stylesheet" type="text/css" href="{% static 'coloring/vendors/bootstrap/css/bootstrap.css' %}" />
+	<link rel="stylesheet" type="text/css" href="{% static 'coloring/css/style.css' %}" />
+	<link href='https://fonts.googleapis.com/css?family=Saira Extra Condensed' rel='stylesheet'>
+
+  <style type="text/css">
+    .scrolling {
+      overflow: auto;
+      white-space: nowrap;
+    }
+
+	</style>
+
+</head>
+<body>
+	<a href="https://ibb.co/3rKbCTZ" style="font-family: Saira Extra Condensed"><img src="https://i.ibb.co/8Kkw7mZ/Rainbow-Background.png" alt="Rainbow-Background" border="0"> Coloring Book</a>
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <h2>Animals</h2>
+        <a href="/coloring/animals/" class="float-right"><img src="{% static 'coloring/images/grid.png' %}"></a>
+        <div class="scrolling">
+          <a href="">
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col"></div>
+    </div>
+
+    <div class="row">
+      <div class="col"></div>
+    </div>
+
+  </div>
+</body>
+</html>
