@@ -1,0 +1,65 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  	<title>Flowers</title>
+
+	<script type="text/javascript" src="{% static 'coloring/vendors/jquery/jquery-3.3.1.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'coloring/vendors/paper/paper-full.min.js' %}"></script>
+	<link rel="stylesheet" type="text/css" href="{% static 'coloring/vendors/bootstrap/css/bootstrap.css' %}" />
+
+  <link href='https://fonts.googleapis.com/css?family=Saira Extra Condensed' rel='stylesheet'>
+
+	<style type="text/css">
+    .flowers {
+      font-size: 7em;
+    }
+
+		.extra-condensed {
+      font-family: "Saira Extra Condensed";
+    }
+
+    .flowers-top {
+      background-color: #66FF7E;
+    }
+
+		.normal-condensed {
+      font-family: Saira;
+    }
+
+		.arrow {
+			width: 1em;
+		}
+
+	</style>
+
+	<script type="text/javascript" canvas="canvas">
+
+	</script>
+</head>
+<body>
+  <h2 class="flowers flowers-top extra-condensed text-center p-5 mb-5">
+		<a href="/coloring/start_screen"><img class="arrow float-left" src="{% static 'coloring/images/arrow.png' %}"></a>Flowers
+	</h2>
+  <div class="container">
+		<div class="row">
+			<div class="col-6 flex-column">
+				<a href="" ><img class="w-100 my-3" src="{% static 'coloring/images/flower_1.png' %}"> </a>
+				<a href="" ><img class="w-100 my-3" src="{% static 'coloring/images/flower_2.png' %}"> </a>
+				<a href="" ><img class="w-100 my-3" src="{% static 'coloring/images/flower_3.png' %}"> </a>
+				<a href="" ><img class="w-100 my-3" src="{% static 'coloring/images/flower_4.png' %}"> </a>
+
+			</div>
+			<div class="col-6 flex-column">
+				<a href="" ><img class="w-100 my-3" src="{% static 'coloring/images/flower_5.png' %}"> </a>
+				<a href="" ><img class="w-100 my-3" src="{% static 'coloring/images/flower_6.png' %}"> </a>
+				<a href="" ><img class="w-100 my-3" src="{% static 'coloring/images/flower_7.png' %}"> </a>
+				<a href="" ><img class="w-100 my-3" src="{% static 'coloring/images/flower_8.png' %}"> </a>
+			</div>
+		</div>
+
+  </div>
+</body>
+</html>
