@@ -7,6 +7,8 @@
   	<title>P3 Coloring</title>
 
 	<script type="text/javascript" src="{% static 'coloring/vendors/jquery/jquery-3.3.1.min.js' %}"></script>
+	<script src="{% static 'coloring/vendors/jquery-ui/jquery-ui.min.js' %}"></script>
+
 	<script type="text/javascript" src="{% static 'coloring/vendors/paper/paper-full.min.js' %}"></script>
 	<link rel="stylesheet" type="text/css" href="{% static 'coloring/vendors/bootstrap/css/bootstrap.css' %}" />
 
@@ -45,43 +47,39 @@
 			border-right-width: thick;
 		}
 
-		.tab1 {
+		.selected-tab {
 			background-color: #f1f1f1;
 			text-align: center;
 			border: #ADADAD;
 			border-style: solid;
 			border-bottom-style: hidden;
-			border-right-style: hidden;
-			border-left-style: hidden;
+			border-right-style: medium;
+			border-left-style: medium;
 			border-top-width: medium;
 		}
 
-		.tab2 {
+		.deselected-tab {
 			background-color: #E2E2E2;
 			text-align: center;
 			border: #ADADAD;
 			border-style: solid;
-			border-bottom-style: hidden;
+			border-bottom-style: medium;
 			border-left-width: medium;
 			border-top-width: medium;
 			border-right-width: medium;
-		}
-
-		.tab3 {
-			background-color: #E2E2E2;
-			text-align: center;
-			border: #ADADAD;
-			border-style: solid;
-			border-bottom-style: hidden;
-			border-right-style: hidden;
-			border-left-style: hidden;
-			border-top-width: medium;
 		}
 
 		img {
 			padding: 20px;
 			width: 80px;
 			align-self: center;
+		}
+
+		.footer {
+			position: absolute;
+    	bottom: 0;
+    	width: 100%;
+			background-color: #f5f5f5;
 		}
 
 	</style>
@@ -122,7 +120,7 @@
 
 				// create a swatch for each color
 				for (var i = colors.length - 1; i >= 0; i--) {
-					var $swatch = $("<div>").css("background-color", colors[i])
+					var $swatch = $("<div>").css({"background-color": colors[i], "margin": "1rem"})
 									   .addClass("swatch");
 					$swatch.click(function(){
 						// add color to the color palette history
@@ -135,7 +133,7 @@
 			// loads a set of colors from a json to create a color palette
 			function getColorsCreatePalette(){
 				cp.$container.html(" ");
-				$.getJSON('/static/coloring/vendors/material/colors.json', function(colors){
+				$.getJSON('/static/coloring/vendors/material/material-colors.json', function(colors){
 					var keys = Object.keys(colors);
 					for (var i = keys.length - 1; i >= 0; i--) {
 						cp.options.push(colors[keys[i]][500]);
@@ -166,6 +164,47 @@
 
 			// Set up the mandala interactivity.
 			init(true);
+
+			var currentTab;
+
+			function enableTab1() {
+				if (currentTab !== 1) {
+					$(".tab2").removeClass("selected-tab").addClass("deselected-tab");
+					$(".tab3").removeClass("selected-tab").addClass("deselected-tab");
+					$(".tab1").removeClass("deselected-tab").addClass("selected-tab");
+					$("#color-palette").show();
+					currentTab = 1;
+				}
+			}
+
+			function enableTab2() {
+				if (currentTab !== 2) {
+					$(".tab1").removeClass("selected-tab").addClass("deselected-tab");
+					$(".tab3").removeClass("selected-tab").addClass("deselected-tab");
+					$(".tab2").removeClass("deselected-tab").addClass("selected-tab");
+					$("#color-palette").hide();
+					currentTab = 2;
+				}
+			}
+
+			function enableTab3() {
+				if (currentTab !== 3) {
+					$(".tab1").removeClass("selected-tab").addClass("deselected-tab");
+					$(".tab2").removeClass("selected-tab").addClass("deselected-tab");
+					$(".tab3").removeClass("deselected-tab").addClass("selected-tab");
+					$("#color-palette").hide();
+					currentTab = 3;
+				}
+			}
+
+
+			$(".tab1").click(enableTab1);
+
+			$(".tab2").click(enableTab2);
+
+			$(".tab3").click(enableTab3);
+
+			enableTab1();
 		}
 	</script>
 </head>
@@ -173,20 +212,24 @@
 	<nav class="navbar sticky-top navbar-light bg-light">
   	<a class="navbar-brand">Sticky top</a>
 	</nav>
-	<canvas id="myCanvas" width="750px" height="750px"></canvas>
-	<div class="container" style="padding: 0; width: 750px">
-	<div class="row tabs">
-		<div class="col-4 tab1">
-			<a  class="mx-2 puddle"><img src="{% static 'coloring/images/noun_puddle_3968971 1.png' %}"></a>
+
+	<canvas id="myCanvas" width="750px" height="750px" class="align-middle"></canvas>
+
+	<footer class="footer">
+		<div class="container-flex">
+			<div class="row tabs">
+				<div class="col-4 tab1 selected-tab">
+					<a class="mx-2 puddle"><img src="{% static 'coloring/images/noun_puddle_3968971 1.png' %}"></a>
+				</div>
+				<div class="col-4 tab2 deselected-tab">
+					<a class="mx-2 puddle"><img src="{% static 'coloring/images/noun_color wheel_3936709 1.png' %}"></a>
+				</div>
+				<div class="col-4 tab3 deselected-tab">
+					<a class="mx-2 puddle"><img src="{% static 'coloring/images/noun_Pencil_4046807 3.png' %}"></a>
+				</div>
+				<div id="color-palette" class="m-2 justify-content-center"></div>
+			</div>
 		</div>
-		<div class="col-4 tab2">
-			<a  class="mx-2 puddle"><img src="{% static 'coloring/images/noun_color wheel_3936709 1.png' %}"></a>
-		</div>
-		<div class="col-4 tab3">
-			<a  class="mx-2 puddle"><img src="{% static 'coloring/images/noun_Pencil_4046807 3.png' %}"></a>
-		</div>
-		<div id="color-palette"></div>
-	</div>
-	</div>
+	</footer>
 </body>
 </html>
