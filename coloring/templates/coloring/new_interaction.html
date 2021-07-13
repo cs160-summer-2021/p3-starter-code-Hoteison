@@ -16,7 +16,7 @@
 			display: flex;
 			flex-wrap: wrap;
 			position: absolute;
-			top: 0;
+			bottom: 0;
 		}
 
 		.swatch {
@@ -42,10 +42,10 @@
 			var canvas = document.getElementById('myCanvas');
 
 			// coloring page
-			var piggy = {
+			var mandala = {
 				item: null,
 				lastClicked: null,
-				filePath: '/static/coloring/images/animal_8'
+				filePath: '/static/coloring/images/mandala-freepik.svg'
 			};
 
 			// color palette
@@ -59,7 +59,7 @@
 				var tool = new paper.Tool();
 
 				tool.onMouseDown = function (event) {
-				    var hit = piggy.item.hitTest(event.point, { tolerance: 10, fill: true });
+				    var hit = mandala.item.hitTest(event.point, { tolerance: 10, fill: true });
 				    if (hit) {
 				    		// Color pallette keeps track of the full history of colors, though we
 				    		// only color in with the most-recent color.
@@ -99,9 +99,10 @@
 				paper.setup(canvas);
 				getColorsCreatePalette();
 
-				paper.project.importSVG(piggy.filePath, function(item) {
-					piggy.item = item._children["design-freepik"];
-				    paper.project.insertLayer(0,piggy.item);
+
+				paper.project.importSVG(mandala.filePath, function(item) {
+					mandala.item = item._children["design-freepik"];
+				    paper.project.insertLayer(0,mandala.item);
 
 				    if (custom) {
 				    	myCustomInteraction();
@@ -110,14 +111,20 @@
 				    }
 
 				});
+
+
 			}
 
-			// Set up the piggy interactivity.
+			// Set up the mandala interactivity.
 			init(true);
 		}
 	</script>
 </head>
 <body>
+
+	<nav class="navbar sticky-top navbar-light bg-light">
+  	<a class="navbar-brand">Sticky top</a>
+	</nav>
 
 	<canvas id="myCanvas" width="750px" height="750px"></canvas>
 	<div id="color-palette"></div>

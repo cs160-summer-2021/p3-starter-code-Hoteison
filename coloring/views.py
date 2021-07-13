@@ -15,3 +15,6 @@ def flowers(request):
 
 def landscapes(request):
     return render(request, 'coloring/landscapes.html')
+
+def new_interaction(request):
+    return render(request, 'coloring/new_interaction.html')
