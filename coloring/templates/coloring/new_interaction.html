@@ -100,10 +100,20 @@
 			text-align: center;
 		}
 
+		.tool-image {
+			width: 10%;
+			height: 10%;
+		}
+
 	</style>
 
 	<script type="text/javascript" canvas="canvas">
 		window.onload = function() {
+			//tools
+			var brush = false;
+			var color_picker = false;
+			var eraser = false;
+
 			var canvas = document.getElementById('myCanvas');
 
 			// coloring page
@@ -130,9 +140,15 @@
 				    if (hit) {
 				    		// Color pallette keeps track of the full history of colors, though we
 				    		// only color in with the most-recent color.
-								const action = [hit.item, hit.item.fillColor._canvasStyle, cp.history[cp.history.length -1]];
-				        hit.item.fillColor = cp.history[cp.history.length - 1];
-								cp.hits.push(action);
+								if (brush || eraser) {
+									const action = [hit.item, hit.item.fillColor._canvasStyle, cp.history[cp.history.length -1]];
+					        hit.item.fillColor = cp.history[cp.history.length - 1];
+									cp.hits.push(action);
+								} else {
+									var picked = hit.item.fillColor._canvasStyle;
+									cp.history.push(picked);
+									$("#current-color").css("background-color", picked);
+								}
 				    }
 				}
 			}
@@ -147,6 +163,7 @@
 					$swatch.click(function(){
 						// add color to the color palette history
 					  	cp.history.push($(this).css("background-color"));
+							$("#current-color").css("background-color", $(this).css("background-color"));
 					});
 					cp.$container.append($swatch);
 				}
@@ -192,9 +209,12 @@
 			function enableTab1() {
 				if (currentTab !== 1) {
 					$(".tab2").removeClass("selected-tab").addClass("deselected-tab");
+					$(".tab3").removeClass("selected-tab").addClass("deselected-tab");
+
 					$(".tab1").removeClass("deselected-tab").addClass("selected-tab");
 					$("#color-palette").show();
-					$("#sliders").hide();
+					$("#slide-container").hide();
+					$("#tool-container").hide();
 					currentTab = 1;
 				}
 			}
@@ -202,10 +222,27 @@
 			function enableTab2() {
 				if (currentTab !== 2) {
 					$(".tab1").removeClass("selected-tab").addClass("deselected-tab");
+					$(".tab3").removeClass("selected-tab").addClass("deselected-tab");
+
 					$(".tab2").removeClass("deselected-tab").addClass("selected-tab");
 					$("#color-palette").hide();
-					$("#sliders").show();
+					$("#slide-container").show();
+					$("#tool-container").hide();
+
 					currentTab = 2;
+				}
+			}
+
+			function enableTab3() {
+				if (currentTab !== 3) {
+					$(".tab1").removeClass("selected-tab").addClass("deselected-tab");
+					$(".tab2").removeClass("selected-tab").addClass("deselected-tab");
+
+					$(".tab3").removeClass("deselected-tab").addClass("selected-tab");
+					$("#color-palette").hide();
+					$("#slide-container").hide();
+					$("#tool-container").show();
+					currentTab = 3;
 				}
 			}
 
@@ -213,7 +250,9 @@
 
 			$(".tab2").click(enableTab2);
 
-			enableTab1();
+			$(".tab3").click(enableTab3);
+
+			enableTab3();
 
 			$(".undo").click(function() {
 				if (cp.hits.length > 0) {
@@ -229,15 +268,56 @@
 				}
 			});
 
-			var slider = document.getElementById("myRange");
+			function reset_tools() {
+				$("#color-picker").css("background-color", "white");
+				$("#brush").css("background-color", "white");
+				$("#eraser").css("background-color", "white");
+			}
+
+			reset_tools();
+
+			$("#brush").click(function() {
+				if (!brush) {
+					color_picker = false;
+					eraser = false;
+					brush = true;
+					reset_tools();
+					$(this).css("background-color", "gray")
+				}
+			});
+
+			$("#eraser").click(function() {
+				if (!eraser) {
+					color_picker = false;
+					brush = false;
+					eraser = true;
+					reset_tools();
+					$(this).css("background-color", "gray")
+					cp.history.push("#FFFFFF");
+				}
+			});
+
+			$("#color-picker").click(function() {
+				if (!color_picker) {
+					eraser = false;
+					brush = false;
+					color_picker = true;
+					reset_tools();
+					$(this).css("background-color", "gray")
+				}
+			});
+
+			//set brush as default starting
+			brush = true;
+			$("#brush").css("background-color", "gray")
+
+			var slider = document.getElementById("brightness");
 			var output = document.getElementById("demo");
 			output.innerHTML = slider.value;
 			slider.oninput = function() {
   			output.innerHTML = this.value;
-		}
-		}
-		while (true) {
-			getColorsCreatePalette();
+				getColorsCreatePalette();
+			}
 		}
 	</script>
 </head>
@@ -246,7 +326,10 @@
 		<div class="col-1">
 			<a href="start_screen" class="mx-2"><img src="{% static 'coloring/images/arrow.png' %}" width="50"></a>
 		</div>
-		<div class="col-9">	</div>
+		<div class="col-1">
+			<div id="current-color" class="swatch border mx-5"></div>
+		</div>
+		<div class="col-8">	</div>
 		<div class="col-2">
 			<img class="undo" src="{% static 'coloring/images/noun_undo.png' %}" width="50">
 			<p class="d-inline align-middle" style="font-size:50px">/</p>
@@ -259,18 +342,34 @@
 	<footer class="footer">
 		<div class="container-flex">
 			<div class="row tabs">
-				<div class="col-6 tab1 selected-tab">
+				<div class="col-4 tab1 selected-tab">
 					<a class="mx-2"><img class="tab_icon" src="{% static 'coloring/images/noun_puddle_3968971 1.png' %}"></a>
 				</div>
-				<div class="col-6 tab2 deselected-tab">
+				<div class="col-4 tab2 deselected-tab">
 					<a class="mx-2"><img class="tab_icon" src="{% static 'coloring/images/noun_color wheel_3936709 1.png' %}"></a>
+				</div>
+				<div class="col-4 tab3 deselected-tab">
+					<a class="mx-2"><img class="tab_icon" src="{% static 'coloring/images/noun_Pencil_4046807 3.png' %}"></a>
 				</div>
 
 				<div id="color-palette" class="m-2 justify-content-center"></div>
-				<div class="slidecontainer">
-  <input type="range" min="1" max="900" value="500" class="slider" id="myRange">
-	<p>Value: <span id="demo"></span></p>
-</div>
+				<div id="slide-container" class="m-5 w-50">
+				  <input type="range" min="50" max="900" value="500" class="slider" id="brightness">
+					<p>Value: <span id="demo"></span></p>
+				</div>
+				<div id="tool-container" class="container">
+						<div class="row mt-5">
+							<div class="col-4">
+								<img id="color-picker" class="h-25 border" src="{% static 'coloring/images/color_picker.png' %}">
+							</div>
+							<div class="col-4">
+								<img id="eraser" class="h-25 border" src="{% static 'coloring/images/eraser.png' %}">
+							</div>
+							<div class="col-4">
+								<img id="brush" class="h-25 border" src="{% static 'coloring/images/brush.png' %}">
+							</div>
+						</div>
+				</div>
 			</div>
 		</div>
 	</footer>
