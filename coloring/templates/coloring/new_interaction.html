@@ -138,7 +138,7 @@
 
 			// create a color palette with the given colors
 			function createColorPalette(colors){
-
+				cp.$container.empty();
 				// create a swatch for each color
 				for (var i = colors.length - 1; i >= 0; i--) {
 					var $swatch = $("<div>").css({"background-color": colors[i], "margin": "1rem"})
@@ -191,10 +191,9 @@
 			function enableTab1() {
 				if (currentTab !== 1) {
 					$(".tab2").removeClass("selected-tab").addClass("deselected-tab");
-					$(".tab3").removeClass("selected-tab").addClass("deselected-tab");
 					$(".tab1").removeClass("deselected-tab").addClass("selected-tab");
 					$("#color-palette").show();
-					$("#color-wheel").hide();
+					$("#slider").hide();
 					currentTab = 1;
 				}
 			}
@@ -202,31 +201,16 @@
 			function enableTab2() {
 				if (currentTab !== 2) {
 					$(".tab1").removeClass("selected-tab").addClass("deselected-tab");
-					$(".tab3").removeClass("selected-tab").addClass("deselected-tab");
 					$(".tab2").removeClass("deselected-tab").addClass("selected-tab");
 					$("#color-palette").hide();
-					$("#color-wheel").show();
+					$("#slider").show();
 					currentTab = 2;
 				}
 			}
 
-			function enableTab3() {
-				if (currentTab !== 3) {
-					$(".tab1").removeClass("selected-tab").addClass("deselected-tab");
-					$(".tab2").removeClass("selected-tab").addClass("deselected-tab");
-					$(".tab3").removeClass("deselected-tab").addClass("selected-tab");
-					$("#color-palette").hide();
-					$("#color-wheel").hide();
-					currentTab = 3;
-				}
-			}
-
-
 			$(".tab1").click(enableTab1);
 
 			$(".tab2").click(enableTab2);
-
-			$(".tab3").click(enableTab3);
 
 			enableTab1();
 
@@ -243,10 +227,6 @@
 					cp.hits.push(cp.redo.pop());
 				}
 			});
-
-			setInterval(function() {
-  // animiate something
-			}, 1000/60);
 
 		}
 	</script>
@@ -269,19 +249,15 @@
 	<footer class="footer">
 		<div class="container-flex">
 			<div class="row tabs">
-				<div class="col-4 tab1 selected-tab">
+				<div class="col-6 tab1 selected-tab">
 					<a class="mx-2"><img class="tab_icon" src="{% static 'coloring/images/noun_puddle_3968971 1.png' %}"></a>
 				</div>
-				<div class="col-4 tab2 deselected-tab">
+				<div class="col-6 tab2 deselected-tab">
 					<a class="mx-2"><img class="tab_icon" src="{% static 'coloring/images/noun_color wheel_3936709 1.png' %}"></a>
 				</div>
-				<div class="col-4 tab3 deselected-tab">
-					<a class="mx-2"><img class="tab_icon" src="{% static 'coloring/images/noun_Pencil_4046807 3.png' %}"></a>
-				</div>
+
 				<div id="color-palette" class="m-2 justify-content-center"></div>
-				<div id="color-wheel" class="m-2 justify-content-center">
-					<img class="color_wheel" src="{% static 'coloring/images/image 9.png' %}" width="100px" height="200px">
-				</div>
+				<div id="slider" class="w-100 h-100 m-5">100</div>
 			</div>
 		</div>
 	</footer>
