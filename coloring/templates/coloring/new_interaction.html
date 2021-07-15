@@ -24,17 +24,9 @@
 			align-items: center
 		}
 
-		#color-wheel {
-			background-color: #f1f1f1;
-			display: flex;
-			flex-wrap: wrap;
-			bottom: 0;
-			padding: 0;
-		}
-
 		.swatch {
-			width: 60px;
-			height: 60px;
+			width: 40px;
+			height: 40px;
 			-moz-border-radius: 12px;
 			-webkit-border-radius: 12px;
 			border-radius: 12px;
@@ -91,9 +83,8 @@
 			background-color: #f5f5f5;
 		}
 
-		.color_wheel {
-			width: 100%;
-			height: auto;
+		#color_wheel {
+			width: 10 !important;
 		}
 
 		.undo {
@@ -222,6 +213,7 @@
 					$(".tab1").removeClass("deselected-tab").addClass("selected-tab");
 					$("#color-palette").show();
 					$("#slide-container").hide();
+					$("#color_wheel").hide();
 					$("#tool-container").hide();
 					currentTab = 1;
 				}
@@ -235,6 +227,7 @@
 					$(".tab2").removeClass("deselected-tab").addClass("selected-tab");
 					$("#color-palette").hide();
 					$("#slide-container").show();
+					$("#color_wheel").show();
 					$("#tool-container").hide();
 
 					currentTab = 2;
@@ -249,6 +242,7 @@
 					$(".tab3").removeClass("deselected-tab").addClass("selected-tab");
 					$("#color-palette").hide();
 					$("#slide-container").hide();
+					$("#color_wheel").hide();
 					$("#tool-container").show();
 					currentTab = 3;
 				}
@@ -362,9 +356,10 @@
 			</div>
 <div class="row">
 					<div id="color-palette" class="m-2 justify-content-center"></div>
+					<img id="color_wheel" src="{% static 'coloring/images/image 9.png' %}">
 				<div id="slide-container" class="m-5 w-50">
 				  <input type="range" min="50" max="900" value="500" class="slider" id="brightness">
-					<p>Value: <span id="demo"></span></p>
+					<p>Saturation: <span id="demo"></span></p>
 				</div>
 				<div id="tool-container" class="container">
 						<div class="row mt-5">
