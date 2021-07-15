@@ -101,8 +101,16 @@
 		}
 
 		.tool-image {
-			width: 10%;
-			height: 10%;
+			width: 40%;
+			padding: 20;
+		}
+
+		.footer {
+			position: fixed;
+		}
+
+		.tool-container {
+			text-align: center;
 		}
 
 	</style>
@@ -252,7 +260,7 @@
 
 			$(".tab3").click(enableTab3);
 
-			enableTab3();
+			enableTab1();
 
 			$(".undo").click(function() {
 				if (cp.hits.length > 0) {
@@ -351,8 +359,9 @@
 				<div class="col-4 tab3 deselected-tab">
 					<a class="mx-2"><img class="tab_icon" src="{% static 'coloring/images/noun_Pencil_4046807 3.png' %}"></a>
 				</div>
-
-				<div id="color-palette" class="m-2 justify-content-center"></div>
+			</div>
+<div class="row">
+					<div id="color-palette" class="m-2 justify-content-center"></div>
 				<div id="slide-container" class="m-5 w-50">
 				  <input type="range" min="50" max="900" value="500" class="slider" id="brightness">
 					<p>Value: <span id="demo"></span></p>
@@ -360,18 +369,18 @@
 				<div id="tool-container" class="container">
 						<div class="row mt-5">
 							<div class="col-4">
-								<img id="color-picker" class="h-25 border" src="{% static 'coloring/images/color_picker.png' %}">
+								<img id="color-picker" class="border tool-image" src="{% static 'coloring/images/color_picker.png' %}">
 							</div>
 							<div class="col-4">
-								<img id="eraser" class="h-25 border" src="{% static 'coloring/images/eraser.png' %}">
+								<img id="eraser" class="border tool-image" src="{% static 'coloring/images/eraser.png' %}">
 							</div>
 							<div class="col-4">
-								<img id="brush" class="h-25 border" src="{% static 'coloring/images/brush.png' %}">
+								<img id="brush" class="border tool-image" src="{% static 'coloring/images/brush.png' %}">
 							</div>
 						</div>
 				</div>
 			</div>
-		</div>
+	</div>
 	</footer>
 </body>
 </html>
